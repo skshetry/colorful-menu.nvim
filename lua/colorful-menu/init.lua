@@ -67,6 +67,16 @@ M.config = {
             -- difference with pyright.
             arguments_hl = "@comment",
         },
+        ty = {
+            -- Such as the module of unimported symbols, `Unknown` types,
+            -- and the "(+N overloads)" hint of overloaded functions.
+            extra_info_hl = "@comment",
+            -- Show variable types and function return types on the right,
+            -- instead of inline as "x: int" and "foo() -> int".
+            align_type_to_right = true,
+            -- See https://github.com/xzbdmw/colorful-menu.nvim/pull/36
+            preserve_type_when_truncate = true,
+        },
         dartls = {
             extra_info_hl = "@comment",
         },
@@ -145,7 +155,7 @@ local function _highlights(completion_item, ls)
     elseif ls == "dartls" then
         item = require("colorful-menu.languages.dart").dartls(completion_item, ls)
         --
-    elseif ls == "basedpyright" or ls == "pyright" or ls == "pylance" or ls == "pylsp" then
+    elseif ls == "basedpyright" or ls == "pyright" or ls == "pylance" or ls == "pylsp" or ls == "ty" then
         item = require("colorful-menu.languages.python").py(completion_item, ls)
         --
     else

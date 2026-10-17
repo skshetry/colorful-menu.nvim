@@ -22,6 +22,7 @@ Has built-in support for
 - [**zls (Zig)**](#zls)
 - [**roslyn (C#)**](#roslyn)
 - [**basedpyright/pylance/pyright/pylsp (Python)**](#basedpyright)
+- [**ty (Python)**](#ty)
 - [**dartls (Dart)**](#dartls)
 
 For other languages, it defaults to use highlight group of item's kind.
@@ -111,6 +112,15 @@ return {
                     -- Dim the function argument area, which is the main
                     -- difference with pyright.
                     arguments_hl = "@comment",
+                },
+                ty = {
+                    -- Such as the module of unimported symbols, `Unknown` types,
+                    -- and the "(+N overloads)" hint of overloaded functions.
+                    extra_info_hl = "@comment",
+                    -- Similar to the same setting of gopls.
+                    align_type_to_right = true,
+                    -- See https://github.com/xzbdmw/colorful-menu.nvim/pull/36
+                    preserve_type_when_truncate = true,
                 },
                 -- If true, try to highlight "not supported" languages.
                 fallback = true,
@@ -388,6 +398,15 @@ Thanks to [@seblj](https://github.com/seblj)
 
 ## after:
 <img width="825" alt="image" src="https://github.com/user-attachments/assets/4e19119d-a064-41da-b987-0a8ef9d0faad" />
+
+# ty
+Signatures are rendered as `name(params)` with the return type aligned to the right,
+and variables/attributes as `name` with their type aligned to the right, all with treesitter
+highlighting. Overloaded functions show the first overload followed by `(+N overloads)`,
+unimported symbols show the module to import from on the right, and `Unknown` types are dimmed.
+Enum members, string literals (e.g. `TypedDict` keys) and keywords show just the name.
+With `align_type_to_right = false`, they are rendered inline as `name(params) -> return`,
+`name: type` and `name (import module)`.
 
 # dartls
 ## before:
